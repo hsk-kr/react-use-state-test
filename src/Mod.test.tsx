@@ -13,7 +13,8 @@ test('Mod initial values', () => {
   const { getStateValue } = watchTestStates();
 
   expect(getStateValue('cnt')).toBe(0);
-  expect(getStateValue('mod')).toEqual({ 3: 0, 5: 0, 7: 0 });
+  expect(getStateValue('modThree')).toBe(0);
+  expect(getStateValue('modFive')).toBe(0);
 });
 
 test('Mod changes depending on cnt', () => {
@@ -21,7 +22,8 @@ test('Mod changes depending on cnt', () => {
   const { getByText } = render(<Mod />)
 
   expect(getStateValue('cnt')).toBe(0);
-  expect(getStateValue('mod')).toEqual({ 3: 0, 5: 0, 7: 0 });
+  expect(getStateValue('modThree')).toBe(0);
+  expect(getStateValue('modFive')).toBe(0);
 
   const increaseBtn = getByText(/increase/);
 
@@ -29,19 +31,22 @@ test('Mod changes depending on cnt', () => {
     fireEvent.click(increaseBtn);
   });
   expect(getStateValue('cnt')).toBe(1);
-  expect(getStateValue('mod')).toEqual({ 3: 1, 5: 1, 7: 1 });
+  expect(getStateValue('modThree')).toBe(1);
+  expect(getStateValue('modFive')).toBe(1);
 
   act(() => {
     fireEvent.click(increaseBtn);
   });
   expect(getStateValue('cnt')).toBe(2);
-  expect(getStateValue('mod')).toEqual({ 3: 2, 5: 2, 7: 2 });
+  expect(getStateValue('modThree')).toBe(2);
+  expect(getStateValue('modFive')).toBe(2);
 
   act(() => {
     fireEvent.click(increaseBtn);
   });
   expect(getStateValue('cnt')).toBe(3);
-  expect(getStateValue('mod')).toEqual({ 3: 0, 5: 3, 7: 3 });
+  expect(getStateValue('modThree')).toBe(0);
+  expect(getStateValue('modFive')).toBe(3);
 });
 
 afterEach(() => {
